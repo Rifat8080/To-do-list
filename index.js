@@ -1,5 +1,3 @@
-import './style.css';
-
 const list = [
   {
     index: 1,
