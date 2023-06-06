@@ -1,6 +1,3 @@
-// import _ from 'lodash';
-import './style.css';
-
 const mylist = [
   {
     description: 'house chores',
