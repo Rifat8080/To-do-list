@@ -1,8 +1,9 @@
-// import _ from 'lodash';
 import './style.css';
+
 import {
   getmylist, addmylist, editmylist, deletemylist,
 } from './functionality.js';
+import { changeTodoStatus, removeCompletedTodos } from './status.js';
 
 const listGroup = document.querySelector('.todo-group');
 const newTask = document.querySelector('.todo-add').querySelector('input');
@@ -14,6 +15,8 @@ listGroup.addEventListener('click', (event) => {
   const clickedItem = event.target.classList[event.target.classList.length - 1];
   const li = event.target.parentElement;
   if (clickedItem === 'delete-icon') deletemylist(li.id);
+  if (clickedItem === 'checked-icon') changeTodoStatus({ index: li.id, status: false });
+  if (clickedItem === 'unchecked-icon') changeTodoStatus({ index: li.id, status: true });
 });
 
 listGroup.addEventListener('keypress', (event) => {
@@ -21,5 +24,8 @@ listGroup.addEventListener('keypress', (event) => {
   const li = event.target.parentElement;
   if (pressedItem === 'edit-todo') editmylist({ index: li.id, event });
 });
+
+const clearCompleted = document.querySelector('.clear-todo');
+clearCompleted.addEventListener('click', removeCompletedTodos);
 
 window.addEventListener('load', () => { getmylist(); });
